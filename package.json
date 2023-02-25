@@ -1,0 +1,62 @@
+{
+  "name": "test-mono",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:plugboy": "turbo prebuild",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "reset": "pnpm clean && pnpm i",
+    "predev": "pnpm build:plugboy && turbo predev",
+    "_dev:docs": "cd ./apps/docs && pnpm dev:docs",
+    "dev": "pnpm predev && pnpm _dev:docs",
+    "build": "pnpm build:plugboy && turbo build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "resolutions": {
+    "@dadajam4/plugboy": "workspace:*",
+    "@dadajam4/**": "workspace:*",
+    "@types/node": "^18.11.19",
+    "@vanilla-extract/css": "^1.9.5",
+    "vite": "^4.1.1",
+    "vue": "^3.2.47"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.13.0",
+    "npm": "use pnpm",
+    "pnpm": ">=7",
+    "yarn": "use pnpm"
+  },
+  "devDependencies": {
+    "@dadajam4/plugboy": "workspace:*",
+    "@types/node": "^18.11.19",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "@vanilla-extract/css": "^1.9.5",
+    "@vanilla-extract/esbuild-plugin": "^2.2.1",
+    "@vanilla-extract/vite-plugin": "^3.8.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "esbuild": "^0.17.8",
+    "esbuild-register": "^3.4.2",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "prettier": "^2.8.3",
+    "turbo": "^1.8.1",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1",
+    "vue": "^3.2.47",
+    "vue-eslint-parser": "^9.1.0"
+  }
+}

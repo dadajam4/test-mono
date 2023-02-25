@@ -1,0 +1,50 @@
+{
+  "name": "@dadajam4/utils",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/utils.d.ts",
+      "import": {
+        "default": "./dist/utils.mjs"
+      }
+    },
+    "./utils.css": "./dist/utils.css",
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "import": {
+        "default": "./dist/cli.mjs"
+      }
+    }
+  },
+  "main": "./dist/cli.mjs",
+  "types": "./dist/cli.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/utils.d.ts"
+      ],
+      "cli": [
+        "./dist/cli.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "pnpm plugboy build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "plugboy": "node ../plugboy/dist/cli.mjs",
+    "predev": "pnpm plugboy link",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "plugboy": {
+    "exports": {
+      ".": "./src/index.ts",
+      "./cli": "./src/cli.ts"
+    }
+  }
+}

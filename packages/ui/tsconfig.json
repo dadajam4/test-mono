@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@@/*": [
+        "../../*"
+      ],
+      "~/*": [
+        "./*"
+      ],
+    }
+  }
+}

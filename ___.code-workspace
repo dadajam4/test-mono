@@ -1,0 +1,73 @@
+{
+	"folders": [
+    {
+      "name": "✨ test-mono",
+      "path": "."
+    },
+    {
+      "name": "🚀 docs",
+      "path": "apps/docs"
+    },
+    {
+      "name": "📦 @dadajam4/plugboy",
+      "path": "packages/plugboy"
+    },
+    {
+      "name": "📦 @dadajam4/ui",
+      "path": "packages/ui"
+    },
+    {
+      "name": "📦 @dadajam4/utils",
+      "path": "packages/utils"
+    }
+  ],
+	"settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.DS_Store": true,
+      "**/dist": true,
+      "**/node_modules": true,
+      "coverage": true
+    },
+
+    // Force show recommendations
+    "extensions.showRecommendationsOnlyOnDemand": false,
+
+    // Use the project's typescript version
+    "typescript.tsdk": "node_modules/typescript/lib",
+
+    "vetur.format.defaultFormatter.html": "prettier",
+
+    // Editor base settings
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": false,
+      "source.fixAll.eslint": true,
+      "source.fixAll.stylelint": true
+    },
+
+    // ESLint base settings
+    "eslint.format.enable": true,
+    "eslint.validate": [
+      "vue",
+      "html",
+      "javascript",
+      "typescriptreact",
+      // "json",
+      "yaml",
+    ],
+    "typescript.format.enable": false,
+    "javascript.format.enable": false,
+  },
+  "extensions": {
+    "recommendations": [
+      "editorconfig.editorconfig",
+      "sohamkamani.code-eol",
+      "dbaeumer.vscode-eslint",
+      "mikestead.dotenv",
+    ]
+  }
+}

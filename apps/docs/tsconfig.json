@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "lib": ["DOM", "esnext"],
+    "types": ["vite/client", "node"],
+    "paths": {
+      "@@/*": [
+        "../../*"
+      ],
+      "~/*": [
+        "./*"
+      ],
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@dadajam4/ui",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/ui.d.ts",
+      "import": {
+        "default": "./dist/ui.mjs"
+      }
+    },
+    "./ui.css": "./dist/ui.css"
+  },
+  "main": "./dist/ui.mjs",
+  "types": "./dist/ui.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/ui.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "pnpm plugboy build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "plugboy": "node ../plugboy/dist/cli.mjs",
+    "predev": "pnpm plugboy link",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@dadajam4/utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.47"
+  }
+}

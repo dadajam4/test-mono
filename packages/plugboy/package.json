@@ -1,0 +1,57 @@
+{
+  "name": "@dadajam4/plugboy",
+  "type": "module",
+  "bin": {
+    "plugboy": "node ./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/plugboy.mjs"
+    }
+  },
+  "types": "dist/plugboy.d.ts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prebuild": "tsup",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-transform-typescript": "^7.20.13",
+    "@types/babel__core": "^7.20.0"
+  },
+  "peerDependencies": {
+    "@babel/plugin-transform-typescript": "^7.20.13",
+    "@vanilla-extract/css": "^1.9.5",
+    "@vanilla-extract/esbuild-plugin": "^2.2.1",
+    "@vue/babel-plugin-jsx": "^1.1.1"
+  },
+  "peerDependenciesMeta": {
+    "@babel/plugin-transform-typescript": {
+      "optional": false
+    },
+    "@vanilla-extract/css": {
+      "optional": false
+    },
+    "@vanilla-extract/esbuild-plugin": {
+      "optional": false
+    },
+    "@vue/babel-plugin-jsx": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.20.12",
+    "cac": "^6.7.14",
+    "pkg-types": "^1.0.1",
+    "sort-package-json": "^2.4.1",
+    "tsup": "^6.6.3"
+  }
+}
