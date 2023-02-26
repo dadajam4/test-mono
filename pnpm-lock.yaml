@@ -64,7 +64,7 @@ importers:
 
   apps/docs:
     specifiers:
-      '@dadajam4/ui': workspace:^1.0.0
+      '@dadajam4/ui': workspace:*
     dependencies:
       '@dadajam4/ui': link:../../packages/ui
 
