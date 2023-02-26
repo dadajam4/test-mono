@@ -36,6 +36,8 @@
     "yarn": "use pnpm"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@changesets/cli": "^2.26.0",
     "@dadajam4/plugboy": "workspace:*",
     "@types/node": "^18.11.19",
     "@typescript-eslint/eslint-plugin": "^5.51.0",

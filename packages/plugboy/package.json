@@ -23,6 +23,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dadajam4/test-mono.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
   "devDependencies": {
     "@babel/plugin-transform-typescript": "^7.20.13",
     "@types/babel__core": "^7.20.0"

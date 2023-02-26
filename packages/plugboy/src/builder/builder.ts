@@ -119,6 +119,11 @@ export class Builder {
       },
     );
 
+    cloned.files = cloned.files || [];
+    if (!cloned.files.some((file) => /(\.\/)?dist\/?/.test(file))) {
+      cloned.files.unshift('dist');
+    }
+
     const sorted = sortPackageJson(cloned);
     const fromStr = JSON.stringify(cloned, null, 2);
     const toStr = JSON.stringify(sorted, null, 2);
