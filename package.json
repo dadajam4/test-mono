@@ -9,7 +9,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:plugboy": "turbo prebuild",
+    "build:plugboy": "turbo run prebuild",
     "clean": "turbo run clean && rm -rf node_modules",
     "reset": "pnpm clean && pnpm i",
     "predev": "pnpm build:plugboy && turbo predev",
@@ -57,7 +57,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
     "prettier": "^2.8.3",
-    "turbo": "^1.8.1",
+    "turbo": "^1.8.3",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
     "vue": "^3.2.47",
