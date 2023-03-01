@@ -16,6 +16,8 @@
     "_dev:docs": "cd ./apps/docs && pnpm dev:docs",
     "dev": "pnpm predev && pnpm _dev:docs",
     "build": "pnpm build:plugboy && turbo build",
+    "ci:version": "changeset version",
+    "ci:publish": "changeset publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "resolutions": {
