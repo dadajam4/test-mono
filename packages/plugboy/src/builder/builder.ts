@@ -70,13 +70,12 @@ export class Builder {
     return links;
   }
 
-  clean() {
+  clean(withDepsAndCache?: boolean) {
     const { dir, dirs } = this.config;
-    const paths: string[] = [
-      dirs.dist.value,
-      dir.join('node_modules').value,
-      dir.join('.turbo').value,
-    ];
+    const paths: string[] = [dirs.dist.value];
+    if (withDepsAndCache) {
+      paths.push(dir.join('node_modules').value, dir.join('.turbo').value);
+    }
     return rmrf(...paths);
   }
 
@@ -94,8 +93,10 @@ export class Builder {
       const trimedId = isMainExport ? id : id.replace(/^\.\//, '');
       typesVersions[trimedId] = [at.types];
 
-      main = at.import.default;
-      mainTypes = at.types;
+      if (isMainExport) {
+        main = at.import.default;
+        mainTypes = at.types;
+      }
     });
 
     const cloned: typeof json = JSON.parse(JSON.stringify(json));
