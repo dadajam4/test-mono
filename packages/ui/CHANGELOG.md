@@ -1,5 +1,16 @@
 # @dadajam4/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- [#6](https://github.com/dadajam4/test-mono/pull/6) [`4663d47`](https://github.com/dadajam4/test-mono/commit/4663d47b3b745eac36f7281fdb6ad00d742ed43b) Thanks [@dadajam4](https://github.com/dadajam4)! - feat: add log sayHello fn
+
+### Patch Changes
+
+- Updated dependencies [[`4663d47`](https://github.com/dadajam4/test-mono/commit/4663d47b3b745eac36f7281fdb6ad00d742ed43b)]:
+  - @dadajam4/utils@1.2.0
+
 ## 1.0.2
 
 ### Patch Changes
