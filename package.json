@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.0",
     "@dadajam4/plugboy": "workspace:*",
     "@types/node": "^18.11.19",
