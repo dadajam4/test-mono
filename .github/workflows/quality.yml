@@ -32,7 +32,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run hoge
-        run: pnpm predev && pnpm lint && pnpm typecheck && pnpm test
+        run: pnpm lint && pnpm build && pnpm typecheck && pnpm test
 
   # eslint:
   #   name: ESLint
