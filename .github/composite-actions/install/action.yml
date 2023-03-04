@@ -1,5 +1,9 @@
 name: "Install"
 description: "Sets up Node.js and runs install"
+inputs:
+  NODE_AUTH_TOKEN:
+    default: ''
+    required: false
 
 runs:
   using: composite

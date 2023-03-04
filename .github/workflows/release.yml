@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     paths:
+      - ".github/composite-actions/**"
       - ".github/workflows/release.yml"
       - ".changeset/**"
       - "packages/**"
