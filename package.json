@@ -17,12 +17,10 @@
     "dev": "pnpm predev && pnpm _dev:docs",
     "build": "pnpm build:plugboy && turbo build",
     "ci:version": "changeset version",
-    "ci:publish": "pnpm build && pnpm publish -r",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ci:publish": "pnpm build && changeset publish",
+    "test": "turbo run test"
   },
   "resolutions": {
-    "@dadajam4/plugboy": "workspace:*",
-    "@dadajam4/**": "workspace:*",
     "@types/node": "^18.11.19",
     "@vanilla-extract/css": "^1.9.5",
     "vite": "^4.1.1",
@@ -61,6 +59,7 @@
     "turbo": "^1.8.3",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
+    "vitest": "^0.29.2",
     "vue": "^3.2.47",
     "vue-eslint-parser": "^9.1.0"
   }
