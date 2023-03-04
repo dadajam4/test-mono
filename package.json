@@ -18,6 +18,8 @@
     "build": "pnpm build:plugboy && turbo build",
     "ci:version": "changeset version",
     "ci:publish": "pnpm build && changeset publish",
+    "lint": "turbo run lint",
+    "typecheck": "tsc --noEmit",
     "test": "turbo run test"
   },
   "resolutions": {

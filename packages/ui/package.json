@@ -37,6 +37,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "plugboy": "node ../plugboy/dist/cli.mjs",
     "predev": "pnpm plugboy link",
+    "lint": "eslint",
     "test": "vitest run"
   },
   "dependencies": {

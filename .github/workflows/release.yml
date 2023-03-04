@@ -19,54 +19,11 @@ jobs:
        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
        TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     steps:
-      - name: Checkout
+      - name: Checkout branch
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@dadajam4'
-
-      # [3] pnpm 7系を使用
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-
-      # [4] pnpmのストアディレクトリを取得
-      # - pnpmは依存関係の実体をnode_modulesではなく独自のストアで管理している
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "PNPM_CACHE_DIR=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      # [5] Github Actionsのキャッシュとpnpmのキャッシュの繋ぎ込み
-      # - pnpm-lock.yamlのハッシュが一致するものが存在していれば復元する
-      # - 存在していなければ直近のものを復元する
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.PNPM_CACHE_DIR }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Install Dependencies
-        run: pnpm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Creating .npmrc
-      #   run: |
-      #     cat << EOF > "$HOME/.npmrc"
-      #       registry=https://registry.npmjs.org/
-      #       @dadajam4:registry=https://npm.pkg.github.com/
-      #       //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-      #     EOF
-      #   env:
-      #     NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install
+        uses: ./.github/composite-actions/install
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
