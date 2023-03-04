@@ -28,6 +28,8 @@ jobs:
 
       - name: Install
         uses: ./.github/composite-actions/install
+        with:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
         run: pnpm test
