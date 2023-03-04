@@ -1,5 +1,11 @@
 # @dadajam4/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- [#8](https://github.com/dadajam4/test-mono/pull/8) [`cb0c85d`](https://github.com/dadajam4/test-mono/commit/cb0c85daa0201892eb5a79361803386e2b88ecb7) Thanks [@dadajam4](https://github.com/dadajam4)! - feat: add log
+
 ## 1.1.0
 
 ### Minor Changes
