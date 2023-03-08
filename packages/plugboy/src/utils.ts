@@ -38,20 +38,30 @@ export async function pathExists(
   }
 }
 
+type FileMatcherFn = (
+  file: fs.Dirent,
+  dir: string,
+) => boolean | Promise<boolean>;
+
+type FileMatcher = string | RegExp | FileMatcherFn;
+
+function normalizeFileMatcher(matcher: FileMatcher): FileMatcherFn {
+  if (typeof matcher === 'function') {
+    return matcher;
+  }
+  if (typeof matcher === 'string') {
+    return (file) => file.name.includes(matcher);
+  }
+  return (file) => matcher.test(file.name);
+}
+
 export async function findFile(
   dir: string,
-  matcher: string | RegExp | ((file: fs.Dirent, dir: string) => boolean),
+  matcher: FileMatcher,
   recursive = true,
 ): Promise<string | undefined> {
   const files = await fs.promises.readdir(dir, { withFileTypes: true });
-  let _matcher: (file: fs.Dirent, dir: string) => boolean;
-  if (typeof matcher === 'string') {
-    _matcher = (file) => file.name.includes(matcher);
-  } else if (typeof matcher === 'function') {
-    _matcher = matcher;
-  } else {
-    _matcher = (file) => matcher.test(file.name);
-  }
+  const _matcher = normalizeFileMatcher(matcher);
 
   const dirs: fs.Dirent[] | undefined = recursive ? [] : undefined;
 
@@ -60,7 +70,7 @@ export async function findFile(
       dirs.push(file);
       continue;
     }
-    if (_matcher(file, dir)) {
+    if (await _matcher(file, dir)) {
       return path.join(dir, file.name);
     }
   }
@@ -77,54 +87,71 @@ export async function findFile(
   }
 }
 
-export async function findConfig(
-  fileName: string,
-  dir = process.cwd(),
-): Promise<{
+export interface FindConfigResult {
   dir: string;
   path: string;
   code: string;
-}> {
+}
+
+interface FindConfigSettings<AllowMissing extends boolean | undefined> {
+  fileName: string;
+  allowMissing?: AllowMissing;
+  test?: (result: FindConfigResult) => boolean;
+  /**
+   * Trace up to how many directories above
+   * @default 10
+   */
+  depth?: number;
+}
+
+export async function findConfig<
+  AllowMissing extends boolean | undefined = false,
+>(
+  fileNameOrSettings: string | FindConfigSettings<AllowMissing>,
+  dir = process.cwd(),
+  currentDepth = 0,
+): Promise<
+  AllowMissing extends true ? FindConfigResult | null : FindConfigResult
+> {
+  const settings: FindConfigSettings<AllowMissing> =
+    typeof fileNameOrSettings === 'object'
+      ? fileNameOrSettings
+      : { fileName: fileNameOrSettings };
+
+  const { fileName, test, depth = 10, allowMissing } = settings;
+  if (depth && currentDepth === depth) {
+    if (allowMissing) return null as any;
+    throw new Error(
+      `Failed to retrieve the "${fileName}" file because the maximum depth was reached.`,
+    );
+  }
   const _path = path.join(dir, fileName);
+
+  const next = (err?: unknown) => {
+    const nextDir = path.dirname(dir);
+    if (nextDir !== dir) {
+      return findConfig(fileName, nextDir, currentDepth + 1);
+    }
+    if (allowMissing) return null as any;
+    throw err || new Error(`missing config "${fileName}"`);
+  };
+
   try {
     const code = await fs.promises.readFile(_path, 'utf-8');
-    return {
+    const result: FindConfigResult = {
       dir,
       path: _path,
       code,
     };
+    if (test && !test(result)) {
+      return next();
+    }
+    return result;
   } catch (err) {
-    if (!isFileNotFoundException) {
+    if (!isFileNotFoundException(err)) {
       throw err;
     }
-    const nextDir = path.dirname(dir);
-    if (nextDir !== dir) {
-      return findConfig(fileName, nextDir);
-    }
-    throw err;
-  }
-}
-
-export async function findPackagesDir(cwd = process.cwd()): Promise<string> {
-  const _path = cwd.endsWith('packages') ? cwd : path.join(cwd, 'packages');
-  try {
-    const stats = await fs.promises.stat(_path);
-    if (stats.isDirectory()) return _path;
-
-    const nextDir = path.dirname(_path);
-    if (nextDir !== _path) {
-      return findPackagesDir(nextDir);
-    }
-    throw new Error('missing "packages" directory.');
-  } catch (err) {
-    if (!isFileNotFoundException) {
-      throw err;
-    }
-    const nextDir = path.dirname(_path);
-    if (nextDir !== _path) {
-      return findPackagesDir(nextDir);
-    }
-    throw err;
+    return next(err);
   }
 }
 

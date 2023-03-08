@@ -8,6 +8,7 @@
     "dist"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/plugboy.mjs"
     }
@@ -44,23 +45,34 @@
   },
   "peerDependenciesMeta": {
     "@babel/plugin-transform-typescript": {
-      "optional": false
+      "optional": true
     },
     "@vanilla-extract/css": {
-      "optional": false
+      "optional": true
     },
     "@vanilla-extract/esbuild-plugin": {
-      "optional": false
+      "optional": true
     },
     "@vue/babel-plugin-jsx": {
-      "optional": false
+      "optional": true
     }
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
+    "@types/inquirer": "^9.0.3",
+    "bundle-require": "^4.0.1",
     "cac": "^6.7.14",
+    "glob": "^9.2.1",
+    "inquirer": "^9.1.4",
     "pkg-types": "^1.0.1",
     "sort-package-json": "^2.4.1",
     "tsup": "^6.6.3"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "esbuild"
+      ]
+    }
   }
 }

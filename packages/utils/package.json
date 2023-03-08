@@ -44,9 +44,9 @@
   "scripts": {
     "build": "pnpm plugboy build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "lint": "eslint",
     "plugboy": "node ../plugboy/dist/cli.mjs",
     "predev": "pnpm plugboy link",
-    "lint": "eslint",
     "test": "vitest run"
   },
   "publishConfig": {

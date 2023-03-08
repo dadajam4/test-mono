@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs/promises';
 import { transform } from '@babel/core';
 import vue3Jsx from '@vue/babel-plugin-jsx';
 import type { VueJSXPluginOptions } from '@vue/babel-plugin-jsx';
@@ -6,7 +6,7 @@ import type { VueJSXPluginOptions } from '@vue/babel-plugin-jsx';
 // @ts-expect-error
 import TS from '@babel/plugin-transform-typescript';
 import type { TransformOptions } from '@babel/core';
-import { EsbuildPlugin } from './types';
+import { EsbuildPlugin } from '../../types';
 
 export interface EsbuildVueJSXOptions extends VueJSXPluginOptions {
   sourceMaps?: boolean;
@@ -56,7 +56,7 @@ export function VueJSX(options?: EsbuildVueJSXOptions): EsbuildPlugin {
     setup(build) {
       build.onLoad({ filter: /\.(j|t)sx$/ }, async (args) => {
         const { path } = args;
-        const code = await fs.promises.readFile(path, 'utf8');
+        const code = await fs.readFile(path, 'utf8');
         const result = await transformVue3(code, path, options);
         if (!result) return;
 

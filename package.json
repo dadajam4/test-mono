@@ -1,5 +1,5 @@
 {
-  "name": "test-mono",
+  "name": "dadajam4",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -20,6 +20,8 @@
     "ci:publish": "pnpm build && changeset publish",
     "lint": "turbo run lint",
     "typecheck": "tsc --noEmit",
+    "plugboy": "node ./packages/plugboy/dist/cli.mjs",
+    "gen": "plugboy gen",
     "test": "turbo run test"
   },
   "resolutions": {
@@ -29,8 +31,16 @@
     "vue": "^3.2.47"
   },
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dadajam4/test-mono.git"
+  },
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
   "engines": {
     "node": ">=16.13.0",
     "npm": "use pnpm",
@@ -64,5 +74,10 @@
     "vitest": "^0.29.2",
     "vue": "^3.2.47",
     "vue-eslint-parser": "^9.1.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["esbuild"]
+    }
   }
 }
